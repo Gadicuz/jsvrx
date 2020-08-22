@@ -38,10 +38,10 @@ export class AjvDataValidator implements DataValidator {
     });
   }
 
-  discriminator<M extends DefaultMapping = DefaultMapping>(
+  discriminator<M extends DefaultMapping = DefaultMapping, S extends boolean = false>(
     ids: (keyof M)[],
     unk?: JSONSchemaID
-  ): DiscriminatorOperator<M> {
+  ): DiscriminatorOperator<M, S> {
     const funcs = ids.map((id) => this.ajv.getSchema(id as JSONSchemaID));
     const missed = funcs.map((f, i) => (!f ? ids[i] : undefined)).filter((id) => id);
     if (missed.length != 0) throw new RangeError(`Unknown schemas: ${missed.join(',')}.`);

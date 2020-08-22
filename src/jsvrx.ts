@@ -26,24 +26,27 @@ export class ValidationError<T> extends Error {
 }
 
 export type ValidatorOperator<T> = OperatorFunction<unknown, T>;
-export type DefaultMapping = { [k in JSONSchemaID]: unknown };
-export type GroupedMapping<K, M> = K extends keyof M ? GroupedObservable<K, M[K]> : never;
-export type DiscriminatorOperator<M> = OperatorFunction<unknown, GroupedMapping<keyof M, M>>;
+export type DefaultMapping<T = unknown> = { [k in JSONSchemaID]: T };
+type SeparateGroups<K, M> = K extends keyof M ? GroupedObservable<K, M[K]> : never;
+export type DiscriminatorOperator<M, S extends boolean = false> = OperatorFunction<
+  unknown,
+  S extends true ? SeparateGroups<keyof M, M> : GroupedObservable<keyof M, M[keyof M]>
+>;
 
 export function validator<T>(validate: (obj: unknown) => T): ValidatorOperator<T> {
   return map((obj) => validate(obj));
 }
-export function discriminator<M extends DefaultMapping = DefaultMapping>(
+export function discriminator<M extends DefaultMapping = DefaultMapping, S extends boolean = false>(
   discriminate: (obj: unknown) => keyof M
-): DiscriminatorOperator<M> {
-  return groupBy((obj) => discriminate(obj)) as DiscriminatorOperator<M>;
+): DiscriminatorOperator<M, S> {
+  return groupBy((obj) => discriminate(obj)) as DiscriminatorOperator<M, S>;
 }
 
 export interface DataValidator {
   addSchemas(schemas: JSONSchema[]): void;
   validator<T = unknown>(id: JSONSchemaID): ValidatorOperator<T>;
-  discriminator<M extends DefaultMapping = DefaultMapping>(
+  discriminator<M extends DefaultMapping = DefaultMapping, S extends boolean = false>(
     ids: (keyof M)[],
     unk?: JSONSchemaID
-  ): DiscriminatorOperator<M>;
+  ): DiscriminatorOperator<M, S>;
 }
