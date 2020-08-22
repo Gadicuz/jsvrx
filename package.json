@@ -26,8 +26,8 @@
     "lib"
   ],
   "type": "module",
-  "main": "lib/jsvrx.js",
-  "types": "lib/jsvrx.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
