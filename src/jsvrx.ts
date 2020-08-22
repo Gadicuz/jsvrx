@@ -19,7 +19,7 @@ export function getSchemaID(s: JSONSchema, id?: '$id' | 'id'): JSONSchemaID | un
 
 export class ValidationError<T> extends Error {
   public readonly name = 'ValidationError';
-  constructor(public readonly item: T, message: string, public readonly e: unknown) {
+  constructor(public readonly item: T, message: string, public readonly e?: unknown) {
     super(message);
     Object.setPrototypeOf(this, ValidationError.prototype);
   }
