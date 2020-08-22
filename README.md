@@ -53,11 +53,17 @@ The operator returns [Observable](https://rxjs.dev/api/index/class/Observable).
 
 ### Discriminator
 
-A __discriminator__ operator uses set of JSON Schemas to validate data objects and report invalid objects using supplied key.
+A __discriminator__ operator uses set of JSON Schemas to validate data objects and creates new RxJS output data streams. Every input object is validated and placed in the output data stream according to the object's validated type. Invalid objects are placed in dedicated output data stream.
 
-`discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` constructs RxJS operator to discriminate data objects using a set of JSON Schemas defined by `ids` array. Validated objects grouped by JSON Schema and marked with the schema's id, invalid objects reported in group marked with `inv` value. If validation fails and `inv` is not set a `ValidationError()` error is thrown.
+`discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` constructs RxJS operator to discriminate data objects using a set of JSON Schemas defined by `ids` array. Validated objects are grouped by JSON Schema and are marked with the schema's id, invalid objects are reported in a group marked with `inv` value. If validation fails and `inv` is not set a `ValidationError()` error is thrown.
 
-The operator returns [GroupedObservable](https://rxjs.dev/api/index/class/GroupedObservable). For a returned _GroupedObservable_ `key` value is schema `$id`/`id` value for validated data objects and `inv` value for invalid data objects.
+The operator returns [GroupedObservable](https://rxjs.dev/api/index/class/GroupedObservable) for every unique schema id.
+
+| input object | `GroupedObservable.key` value |
+| --- | --- |
+| Validated by JSON schema `id` | `id` |
+| Invalid and `inv` parameter is present | `inv` |
+| Invalid and `inv` parameter is absent | n/a, `ValidationError` is thrown |
 
 ### Typing
 
