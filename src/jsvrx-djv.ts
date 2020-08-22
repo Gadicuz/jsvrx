@@ -11,8 +11,10 @@ import {
   discriminator,
 } from './jsvrx';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import djv from 'djv';
 
+/** DataValidator interface implementation using Djv */
 export class DjvDataValidator implements DataValidator {
   constructor(public djv: djv.djv) {}
 
@@ -31,7 +33,7 @@ export class DjvDataValidator implements DataValidator {
 
   discriminator<M extends DefaultMapping = DefaultMapping, S extends boolean = false>(
     ids: (keyof M)[],
-    unk?: JSONSchemaID
+    inv?: JSONSchemaID
   ): DiscriminatorOperator<M, S> {
     const validators = ids.map((id) => this.djv.resolve(id as JSONSchemaID)).map((r) => r.fn);
     return discriminator((obj) => {
@@ -43,7 +45,7 @@ export class DjvDataValidator implements DataValidator {
         return false;
       });
       if (k >= 0) return ids[k];
-      if (unk != undefined) return unk;
+      if (inv != undefined) return inv;
       throw new ValidationError(obj, e.join(';'), e);
     });
   }

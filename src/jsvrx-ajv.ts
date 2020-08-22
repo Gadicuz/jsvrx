@@ -19,6 +19,7 @@ function isAjv(opt?: ajv.Ajv | ajv.Options): opt is ajv.Ajv {
   );
 }
 
+/** DataValidator interface implementation using Ajv */
 export class AjvDataValidator implements DataValidator {
   readonly ajv: ajv.Ajv;
   constructor(opt?: ajv.Ajv | ajv.Options) {
@@ -40,7 +41,7 @@ export class AjvDataValidator implements DataValidator {
 
   discriminator<M extends DefaultMapping = DefaultMapping, S extends boolean = false>(
     ids: (keyof M)[],
-    unk?: JSONSchemaID
+    inv?: JSONSchemaID
   ): DiscriminatorOperator<M, S> {
     const funcs = ids.map((id) => this.ajv.getSchema(id as JSONSchemaID));
     const missed = funcs.map((f, i) => (!f ? ids[i] : undefined)).filter((id) => id);
@@ -49,7 +50,7 @@ export class AjvDataValidator implements DataValidator {
     return discriminator((obj) => {
       const k = validators.findIndex((v) => v(obj));
       if (k >= 0) return ids[k];
-      if (unk != undefined) return unk;
+      if (inv != undefined) return inv;
       const e = validators.map((v) => v.errors);
       throw new ValidationError(obj, e.map((e) => this.ajv.errorsText(e)).join(';'), e);
     });

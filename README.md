@@ -39,8 +39,8 @@ The package provides basic `DataValidator` interface to validate/discriminate da
 
 `DataValidator` interface provides methods to add JSON Schemas and to construct __validator__ and __dicriminator__ RxJS operators for a set of Schema ids. To start processing data is RxJS stream one can take the following steps:
 1. Instantiate an implementation of `DataValidator` interface;
-2. Add required JSON Schema using `addSchemas()` method or by other means provided.
-3. Get required RxJS operator for a set of JSON Schema _ids_ using `validator()` or `discriminator()` methods.
+2. Add required JSON Schema using `addSchemas()` method or by other means provided. Every schema should have an unique _identifier_ that is used to refernce the schema in `validator()` and `discriminator()` methods.
+3. Get required RxJS operator for a set of JSON Schema _identifiers_ using `validator()` or `discriminator()` methods.
 4. Use the operator in RxJS data processing `pipe()`.
 
 ### Validator
@@ -55,9 +55,9 @@ The operator returns [Observable](https://rxjs.dev/api/index/class/Observable).
 
 A __discriminator__ operator uses set of JSON Schemas to validate data objects and report invalid objects using supplied key.
 
-`discriminator(ids: JSONSchemaID[], unk?: JSONSchemaID)` constructs RxJS operator to discriminate data objects using a set of JSON Schemas defined by `ids` array. Validated objects grouped by JSON Schema and marked with the schema's id, invalid objects reported in group marked with `unk` value. If validation fails and `unk` is not set a `ValidationError()` error is thrown.
+`discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` constructs RxJS operator to discriminate data objects using a set of JSON Schemas defined by `ids` array. Validated objects grouped by JSON Schema and marked with the schema's id, invalid objects reported in group marked with `inv` value. If validation fails and `inv` is not set a `ValidationError()` error is thrown.
 
-The operator returns [GroupedObservable](https://rxjs.dev/api/index/class/GroupedObservable). For a returned _GroupedObservable_ `key` value is schema `$id`/`id` value for validated data objects and `unk` value for invalid data objects.
+The operator returns [GroupedObservable](https://rxjs.dev/api/index/class/GroupedObservable). For a returned _GroupedObservable_ `key` value is schema `$id`/`id` value for validated data objects and `inv` value for invalid data objects.
 
 ### Typing
 
@@ -99,7 +99,7 @@ discriminator<>(...): OperatorFunction<
 
 `AjvDataValidtor` is a `DataValidator` interface implementation using [Ajv](https://ajv.js.org/).
 
-Create new `AjvDataValidator` instance with `ajv.Options` or pass an `ajv` instace as the constructor's argument.
+Create new `AjvDataValidator` instance with `ajv.Options` or pass an `ajv` instace as the constructor's parameter.
 
 ```typescript
 import ajv from 'ajv';
@@ -117,7 +117,7 @@ const dv = new AjvDataValidator(new ajv())
 
 `DjvDataValidtor` is a `DataValidator` interface implementation using [Djv](https://cli-in-ts.dev/djv/).
 
-Create new `DjvDataValidator` instance passing an `djv` instace as the constructor's argument.
+Create new `DjvDataValidator` instance passing an `djv` instace as the constructor's parameter.
 
 ```typescript
 import djv from 'djv';
@@ -134,14 +134,14 @@ The package declares two functions to help implementing custom provider `DataVal
 * `validator<T>(validate: (obj: unknown) => T)): OperatorFunction<>`
 * `discriminator(discriminate: (obj: unknown) => JSONSchemaID)) OperatorFunction<>`
 
-Both functions with a projector provided as an argument return correct RxJS operator to implement `DataValidator` interface requirements.
+Both functions with a projector provided as an parameter return correct RxJS operator to implement `DataValidator` interface requirements.
 
 To desing a custom provider:
 1. Declare a class that implements `DataValidator` interface.
 2. Desing a custom constructor method.
 3. Implement `addSchemas(schemas: JSONSchema[])` method.
-4. In `validator(id: JSONSchemaID)` method implementation define a functions that validates unknown object with JSONSchema. Return helper `validator()` with the function as the argument.
-5. In `discriminator(ids: JSONSchemaID[], unk?: JSONSchemaID)` method implementation define a functions that validates unknown object with set of JSONSchemas and choose the schema id or `unk` value. Return helper `discriminator()` with the function as the argument.
+4. In `validator(id: JSONSchemaID)` method implementation define a functions that validates unknown object with JSONSchema. Return helper `validator()` with the function as the parameter.
+5. In `discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` method implementation define a functions that validates unknown object with set of JSONSchemas and choose the schema id or `inv` value. Return helper `discriminator()` with the function as the parameter.
 
 # Examples
 
