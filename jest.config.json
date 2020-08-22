@@ -1,0 +1,8 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": ["ts-jest", {"tsConfig": "tsconfig.jest.json"}]
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "coverageProvider": "v8"
+}

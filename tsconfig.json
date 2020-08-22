@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES6",
+    "types": ["json-schema"],
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "outDir": "lib",
+    "noEmitOnError": true,
+    "strict": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/**/__tests__"
+  ]
+}

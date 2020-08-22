@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+ - "node"
+
+before_install:
+ - npm install ajv@^6.12.4"
+ - npm install rxjs@^6.6.2 
+
+script:
+ - npm run test:coveralls
+
+notifications:
+  email: false  
