@@ -17,7 +17,8 @@ RxJS operators to validate/discriminate data objects using [JSON Schema(s)](http
   * __validate__ a data object using single JSON Schema
   * __discriminate__ a data object using set of JSON Schemas
 * Data validation and JSON Schema procesing are provided by well known packages:
-  * [Ajv: Another JSON Schema Validator](https://ajv.js.org/) - `AjvDataValidator` 
+  * [Ajv: Another JSON Schema Validator](https://ajv.js.org/) - `AjvDataValidator`
+  * [Dynamic JSON Schema Validator](https://cli-in-ts.dev/djv/) - `DjvDataValidator`
 * Compatible with standard [RxJS 6](https://github.com/ReactiveX/rxjs/tree/6.x) data processing
 * ECMAScript module, typings available
 
@@ -95,8 +96,10 @@ discriminator<>(...): OperatorFunction<
 
 [![ajv](https://img.shields.io/github/package-json/dependency-version/gadicuz/jsvrx/dev/ajv)](https://www.npmjs.com/package/ajv)
 
-ajv 
-djv 
+## Djv provider
+
+[![djv](https://img.shields.io/github/package-json/dependency-version/gadicuz/jsvrx/dev/djv)](https://www.npmjs.com/package/djv)
+
 Hyperjump JSV
 vue-vuelidate-jsonschema 
 @cfworker/json-schema 
