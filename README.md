@@ -19,6 +19,7 @@ RxJS operators to validate/discriminate data objects using [JSON Schema(s)](http
 * Data validation and JSON Schema procesing are provided by well known packages:
   * [Ajv: Another JSON Schema Validator](https://ajv.js.org/) - `AjvDataValidator`
   * [Dynamic JSON Schema Validator](https://cli-in-ts.dev/djv/) - `DjvDataValidator`
+  * _a custom provider_
 * Compatible with standard [RxJS 6](https://github.com/ReactiveX/rxjs/tree/6.x) data processing
 * ECMAScript module, typings available
 
@@ -30,14 +31,16 @@ npm i jsvrx
 
 # Usage
 
-Package provides basic `DataValidator` interface to validate/discriminate data objects and handful implementations of the interface based on popular libraries.
+The package provides basic `DataValidator` interface to validate/discriminate data objects and handful implementations of the interface based on popular libraries.
+
+`DataValidator` inteface constructs validators and discriminators to use in RxJS data stream processing to validate unknown data object or produce new data streams based on validation results using a set of JSON Schemas.
 
 ## DataValidator interface
 
 `DataValidator` interface provides methods to add JSON Schemas and to construct __validator__ and __dicriminator__ RxJS operators for a set of Schema ids. To start processing data is RxJS stream one can take the following steps:
-1. Instantiate an implementations of `DataValidator` interface;
-2. Add required JSON Schema using `addSchemas()` method or other means provided by the implementation.
-3. Get required RxJS operator for a set of JSON Schema ids using `validator()` or `discriminator()` methods.
+1. Instantiate an implementation of `DataValidator` interface;
+2. Add required JSON Schema using `addSchemas()` method or by other means provided.
+3. Get required RxJS operator for a set of JSON Schema _ids_ using `validator()` or `discriminator()` methods.
 4. Use the operator in RxJS data processing `pipe()`.
 
 ### Validator
@@ -54,8 +57,6 @@ A __discriminator__ operator uses set of JSON Schemas to validate data objects a
 
 `discriminator(ids: JSONSchemaID[], unk?: JSONSchemaID)` constructs RxJS operator to discriminate data objects using a set of JSON Schemas defined by `ids` array. Validated objects grouped by JSON Schema and marked with the schema's id, invalid objects reported in group marked with `unk` value. If validation fails and `unk` is not set a `ValidationError()` error is thrown.
 
-If an interface implementation doesn't provide optimized validation for several JSON Schemas it executes signle JSON Schema validation attempts in `ids` array order.
-
 The operator returns [GroupedObservable](https://rxjs.dev/api/index/class/GroupedObservable). For a returned _GroupedObservable_ `key` value is schema `$id`/`id` value for validated data objects and `unk` value for invalid data objects.
 
 ### Typing
@@ -68,7 +69,7 @@ validator<T>(...): OperatorFunction<unknown, T>
 T is unknown by default.
 ```
 
-One can create _JSON Schema -> Type_ mapping type to control __discriminator__ operator typing.
+It's possible to create a _JSON Schema -> Type_ mapping type to control __discriminator__ operator typing.
 
 ```typescript
 // IDx - JSON schema ids, Tx - corresponding typescript types
@@ -79,7 +80,7 @@ discriminator<M>(...): OperatorFunction<
   GroupedObservable<ID1 | ID2, T1 | T2>
 >
 
-<discriminator<M, true>(...): OperatorFunction<
+discriminator<M, true>(...): OperatorFunction<
   unknown,
   GroupedObservable<ID1, T1> | GroupedObservable<ID2, T2>>
 >
@@ -96,13 +97,51 @@ discriminator<>(...): OperatorFunction<
 
 [![ajv](https://img.shields.io/github/package-json/dependency-version/gadicuz/jsvrx/dev/ajv)](https://www.npmjs.com/package/ajv)
 
+`AjvDataValidtor` is a `DataValidator` interface implementation using [Ajv](https://ajv.js.org/).
+
+Create new `AjvDataValidator` instance with `ajv.Options` or pass an `ajv` instace as the constructor's argument.
+
+```typescript
+import ajv from 'ajv';
+const dv = new AjvDataValidator({ coerceTypes: true })
+const dv = new AjvDataValidator(new ajv())
+```
+
+`AjvDataValidator.discriminator()` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes signle JSON Schema validation attempts in `ids` array order. Fill `ids` array accordingly.
+
+`ValidationError.e` holds `ajv.ValidateFunction.errors` for the __validator__ error and array of `ajv.ValidateFunction.errors` for the __discriminator__ error.
+
 ## Djv provider
 
 [![djv](https://img.shields.io/github/package-json/dependency-version/gadicuz/jsvrx/dev/djv)](https://www.npmjs.com/package/djv)
 
-Hyperjump JSV
-vue-vuelidate-jsonschema 
-@cfworker/json-schema 
+`DjvDataValidtor` is a `DataValidator` interface implementation using [Djv](https://cli-in-ts.dev/djv/).
+
+Create new `DjvDataValidator` instance passing an `djv` instace as the constructor's argument.
+
+```typescript
+import djv from 'djv';
+const djvVD = new djv();
+djvVD.useVersion('draft-06');
+const dv = new DjvDataValidator(djvVD);
+```
+
+`DjvDataValidator.discriminator()` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes signle JSON Schema validation attempts in `ids` array order. Fill `ids` array accordingly.
+
+## Implement a custom provider
+
+The package declares two functions to help implementing custom provider `DataValidator` interface:
+* `validator<T>(validate: (obj: unknown) => T)): OperatorFunction<>`
+* `discriminator(discriminate: (obj: unknown) => JSONSchemaID)) OperatorFunction<>`
+
+Both functions with a projector provided as an argument return correct RxJS operator to implement `DataValidator` interface requirements.
+
+To desing a custom provider:
+1. Declare a class that implements `DataValidator` interface.
+2. Desing a custom constructor method.
+3. Implement `addSchemas(schemas: JSONSchema[])` method.
+4. In `validator(id: JSONSchemaID)` method implementation define a functions that validates unknown object with JSONSchema. Return helper `validator()` with the function as the argument.
+5. In `discriminator(ids: JSONSchemaID[], unk?: JSONSchemaID)` method implementation define a functions that validates unknown object with set of JSONSchemas and choose the schema id or `unk` value. Return helper `discriminator()` with the function as the argument.
 
 # Examples
 
