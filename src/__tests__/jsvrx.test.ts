@@ -4,7 +4,7 @@ import { reduce, toArray, tap, map, catchError, mergeMap } from 'rxjs/operators'
 
 import { JSONSchema7 } from 'json-schema';
 
-import { getSchemaID, ValidationError, DataValidator } from '../../packages/jsvrx/src/jsvrx';
+import { getSchemaID, ValidationError, DataValidator } from 'jsvrx';
 
 const js1: JSONSchema7 = {
   $id: 'SCHEMA1',

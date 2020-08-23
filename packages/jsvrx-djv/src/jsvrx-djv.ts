@@ -9,7 +9,7 @@ import {
   DiscriminatorOperator,
   validator,
   discriminator,
-} from '../../jsvrx/src/jsvrx';
+} from 'jsvrx';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import djv from 'djv';

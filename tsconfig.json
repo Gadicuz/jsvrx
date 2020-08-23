@@ -12,7 +12,11 @@
     "isolatedModules": true,
     "outDir": "esm",
     "noEmitOnError": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "jsvrx": ["packages/jsvrx"]
+    }
   },
   "include": [
     "packages/*/src"

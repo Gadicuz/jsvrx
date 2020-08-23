@@ -8,7 +8,7 @@ import {
   DiscriminatorOperator,
   validator,
   discriminator,
-} from '../../jsvrx/src/jsvrx';
+} from 'jsvrx';
 
 import ajv from 'ajv';
 
