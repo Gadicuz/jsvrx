@@ -27,7 +27,7 @@
     ],
     "settings": {
     },
-    "ignorePatterns": ["/coverage", "/lib", "/node_modules"],
+    "ignorePatterns": ["/coverage", "/node_modules", "/packages/*/esm", "/packages/*/cjs"],
     "overrides": [
         {
             "files": ["src/__tests__/*"],

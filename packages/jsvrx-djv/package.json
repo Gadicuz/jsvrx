@@ -1,0 +1,47 @@
+{
+  "name": "jsvrx-djv",
+  "version": "1.0.0",
+  "description": "RxJS operators to validate/discriminate data objects using JSON Schema(s) and Djv.",
+  "author": "Nikolay Postnikov <nick.postnikov@gmail.com>",
+  "keywords": [
+    "JSON",
+    "schema",
+    "validation",
+    "discrimination",
+    "rxjs",
+    "ECMAScript",
+    "typescript",
+    "djv"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gadicuz/jsvrx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gadicuz/jsvrx/issues"
+  },
+  "homepage": "https://github.com/Gadicuz/jsvrx#readme",
+  "files": [
+    "esm"
+  ],
+  "type": "module",
+  "main": "cjs/jsvrx-djv.js",
+  "module": "esm/jsvrx-djv.js",
+  "types": "esm/jsvrx-djv.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "jsvrx": "^1.1.0"
+  },
+  "peerDependencies": {
+    "djv": "^2.1.3-alpha.0"
+  },
+  "devDependencies": {
+    "djv": "^2.1.3-alpha.0"
+  }
+}

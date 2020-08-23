@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "target": "ES6",
-    "types": ["json-schema"],
+    "types": [],
     "module": "ES6",
     "moduleResolution": "Node",
     "esModuleInterop": true,
@@ -10,14 +10,14 @@
     "declaration": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "outDir": "lib",
+    "outDir": "esm",
     "noEmitOnError": true,
     "strict": true
   },
   "include": [
-    "src"
+    "packages/*/src"
   ],
   "exclude": [
-    "src/**/__tests__"
+    "src/__tests__"
   ]
 }

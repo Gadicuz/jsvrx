@@ -1,47 +1,14 @@
 {
-  "name": "jsvrx",
+  "name": "jsvrx-monorepo",
+  "private": true,
   "version": "1.0.0",
-  "description": "RxJS operators to validate/discriminate data objects using JSON Schema(s).",
   "author": "Nikolay Postnikov <nick.postnikov@gmail.com>",
-  "keywords": [
-    "JSON",
-    "schema",
-    "validation",
-    "discrimination",
-    "rxjs",
-    "ECMAScript",
-    "typescript",
-    "ajv"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gadicuz/jsvrx.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Gadicuz/jsvrx/issues"
-  },
-  "homepage": "https://github.com/Gadicuz/jsvrx#readme",
-  "files": [
-    "lib"
-  ],
-  "type": "module",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p packages/jsvrx/tsconfig.json && tsc -p packages/jsvrx-ajv/tsconfig.json && tsc -p packages/jsvrx-djv/tsconfig.json",
     "lint": "eslint",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
-  },
-  "peerDependencies": {
-    "ajv": "^6.12.4",
-    "djv": "^2.1.3-alpha.0",
-    "rxjs": "^6.6.2"
   },
   "devDependencies": {
     "@types/djv": "^2.1.0",
@@ -57,7 +24,8 @@
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-tsdoc": "^0.2.6",
-    "jest": "^26.4.1",
+    "jest": "^26.4.2",
+    "lerna": "^3.22.1",
     "prettier": "^2.0.5",
     "rxjs": "^6.6.2",
     "ts-jest": "^26.2.0",

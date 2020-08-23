@@ -4,7 +4,7 @@ import { reduce, toArray, tap, map, catchError, mergeMap } from 'rxjs/operators'
 
 import { JSONSchema7 } from 'json-schema';
 
-import { getSchemaID, ValidationError, DataValidator } from '../jsvrx';
+import { getSchemaID, ValidationError, DataValidator } from '../../packages/jsvrx/src/jsvrx';
 
 const js1: JSONSchema7 = {
   $id: 'SCHEMA1',
@@ -106,11 +106,11 @@ function testProvider(name: string, provider: DataValidator, opt: { schemaIdReqi
 }
 
 import ajv from 'ajv';
-import { AjvDataValidator } from '../jsvrx-ajv';
+import { AjvDataValidator } from '../../packages/jsvrx-ajv/src/jsvrx-ajv';
 testProvider('Ajv', new AjvDataValidator(new ajv()) && new AjvDataValidator(), {});
 
 import djv from 'djv';
-import { DjvDataValidator } from '../jsvrx-djv';
+import { DjvDataValidator } from '../../packages/jsvrx-djv/src/jsvrx-djv';
 const djvVD = new djv();
 djvVD.useVersion('draft-06');
 testProvider('Djv', new DjvDataValidator(djvVD), {});
