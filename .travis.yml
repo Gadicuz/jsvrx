@@ -6,6 +6,7 @@ before_install:
  - npm install ajv@^6.12.4
  - npm install djv@^2.1.3-alpha.0
  - npm install rxjs@^6.6.2 
+ - npm install jsvrx@^1.0.0
 
 script:
  - npm run test:coveralls
