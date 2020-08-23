@@ -12,17 +12,14 @@
     "isolatedModules": true,
     "outDir": "esm",
     "noEmitOnError": true,
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "jsvrx": ["packages/jsvrx"]
-    }
+    "strict": true
   },
   "include": [
     "packages/*/src"
   ],
   "exclude": [
     "src/__tests__",
-    "packages/*/esm"
+    "packages/*/esm",
+    "packages/*/cjs"
   ]
 }

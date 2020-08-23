@@ -12,10 +12,7 @@
     "rootDir": "src",
     "allowJs": true,
     "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "jsvrx": ["packages/jsvrx"]
-    }
+    "baseUrl": "."
   },
   "include": [
     "src/**/__tests__"

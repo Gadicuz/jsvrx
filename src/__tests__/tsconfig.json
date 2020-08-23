@@ -2,12 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "esModuleInterop": true,
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "jsvrx": ["../../packages/jsvrx"],
-      "jsvrx-ajv": ["../../packages/jsvrx-ajv"],
-      "jsvrx-djv": ["../../packages/jsvrx-djv"]
-    }
+    "strict": true
   }
 }
