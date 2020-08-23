@@ -5,7 +5,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "jsvrx": ["../../packages/jsvrx"]
+      "jsvrx": ["../../packages/jsvrx"],
+      "jsvrx-ajv": ["../../packages/jsvrx-ajv"],
+      "jsvrx-djv": ["../../packages/jsvrx-djv"]
     }
   }
 }
