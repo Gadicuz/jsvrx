@@ -24,7 +24,7 @@ npm i ajv
 
 # Usage
 
-`AjvDataValidtor` is a `DataValidator` interface implementation using [Ajv](https://ajv.js.org/).
+`AjvDataValidtor` is `DataValidator` interface implementation using [Ajv](https://ajv.js.org/).
 
 For more information about `DataValidation` interface and usage examples see [jsvrx](https://www.npmjs.com/package/jsvrx).
 
@@ -38,7 +38,7 @@ import ajv from 'ajv';
 const dv = new AjvDataValidator(new ajv())
 ```
 
-`AjvDataValidator.discriminator()` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes single JSON Schema validation attempts in `ids` array order. Fill the `ids` array accordingly.
+`AjvDataValidator.discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes single JSON Schema validation attempts in `ids` array order. Fill the `ids` array accordingly.
 
 `ValidationError.e` holds `ajv.ValidateFunction.errors` for the __validator__ error and array of `ajv.ValidateFunction.errors` for the __discriminator__ error.
 

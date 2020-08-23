@@ -24,7 +24,7 @@ npm i djv
 
 # Usage
 
-`DjvDataValidtor` is a `DataValidator` interface implementation using [Djv](https://cli-in-ts.dev/djv/).
+`DjvDataValidtor` is `DataValidator` interface implementation using [Djv](https://cli-in-ts.dev/djv/).
 
 For more information about `DataValidation` interface and usage examples see [jsvrx](https://www.npmjs.com/package/jsvrx).
 
@@ -38,5 +38,5 @@ djvVD.useVersion('draft-06');
 const dv = new DjvDataValidator(djvVD);
 ```
 
-`DjvDataValidator.discriminator()` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes single JSON Schema validation attempts in `ids` array order. Fill the `ids` array accordingly.
+`DjvDataValidator.discriminator(ids: JSONSchemaID[], inv?: JSONSchemaID)` implementation doesn't provide optimized validation for multiple JSON Schemas. It executes single JSON Schema validation attempts in `ids` array order. Fill the `ids` array accordingly.
 
