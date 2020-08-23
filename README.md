@@ -6,7 +6,7 @@ RxJS operators to validate/discriminate data objects using [JSON Schema(s)](http
 [![Coverage Status](https://coveralls.io/repos/github/Gadicuz/jsvrx/badge.svg?branch=master)](https://coveralls.io/github/Gadicuz/jsvrx?branch=master)
 [![npm](https://img.shields.io/npm/v/jsvrx)](https://www.npmjs.com/package/jsvrx)
 [![rxjs](https://img.shields.io/github/package-json/dependency-version/gadicuz/jsvrx/dev/rxjs)](https://www.npmjs.com/package/rxjs)
-[![Code Size](https://img.shields.io/github/languages/code-size/gadicuz/jsvrx)](https://github.com/gadicuz/jsvrx)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/jsvrx)](https://bundlephobia.com/result?p=jsvrx)
 [![Top Language](https://img.shields.io/github/languages/top/gadicuz/jsvrx)](https://github.com/gadicuz/jsvrx)
 [![MIT License](https://img.shields.io/github/license/gadicuz/jsvrx)](https://github.com/Gadicuz/jsvrx/blob/master/LICENSE)
 
