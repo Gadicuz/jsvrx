@@ -1,6 +1,6 @@
 {
   "name": "jsvrx-ajv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RxJS operators to validate/discriminate data objects using JSON Schema(s) and Ajv.",
   "author": "Nikolay Postnikov <nick.postnikov@gmail.com>",
   "keywords": [

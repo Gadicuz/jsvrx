@@ -1,6 +1,6 @@
 {
   "name": "jsvrx",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An interface for RxJS operators creation to validate/discriminate data objects using JSON Schema(s).",
   "author": "Nikolay Postnikov <nick.postnikov@gmail.com>",
   "keywords": [
