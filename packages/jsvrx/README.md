@@ -22,11 +22,11 @@ RxJS operators to validate/discriminate data objects using [JSON Schema(s)](http
 
 # Usage
 
-The package declares an abstract `DataValidator` interface. Use existing implementations or [create your own](##-A-custom-implementation).
+The package declares an abstract `DataValidator` interface. Use existing implementations or [create your own](#a-custom-implementation).
 
 Known implementations:
-* [jsvrx-ajv](packages/jsvrx-ajv/README.md) - `DataValidator` implementation using [Ajv](https://ajv.js.org/)
-* [jsvrx-djv](packages/jsvrx-djv/README.md) - `DataValidator` implementation using [Djv](https://cli-in-ts.dev/djv/)
+* [jsvrx-ajv](../jsvrx-ajv/README.md) - `DataValidator` implementation using [Ajv](https://ajv.js.org/)
+* [jsvrx-djv](../jsvrx-djv/README.md) - `DataValidator` implementation using [Djv](https://cli-in-ts.dev/djv/)
 
 
 ## Examples
