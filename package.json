@@ -1,7 +1,7 @@
 {
   "name": "jsvrx-monorepo",
   "private": true,
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Nikolay Postnikov <nick.postnikov@gmail.com>",
   "scripts": {
     "build": "tsc -p packages/jsvrx/tsconfig.json && tsc -p packages/jsvrx-ajv/tsconfig.json && tsc -p packages/jsvrx-djv/tsconfig.json",
