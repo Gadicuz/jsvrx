@@ -26,7 +26,7 @@
     "esm"
   ],
   "type": "module",
-  "main": "cjs/jsvrx-djv.js",
+  "main": "esm/jsvrx-djv.js",
   "module": "esm/jsvrx-djv.js",
   "types": "esm/jsvrx-djv.d.ts",
   "publishConfig": {
