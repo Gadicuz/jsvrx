@@ -10,6 +10,7 @@ import {
   validator,
   discriminator,
 } from 'jsvrx';
+export type { JSONSchema, JSONSchemaID } from 'jsvrx';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import djv from 'djv';

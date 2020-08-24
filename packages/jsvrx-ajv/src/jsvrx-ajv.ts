@@ -9,6 +9,7 @@ import {
   validator,
   discriminator,
 } from 'jsvrx';
+export type { JSONSchema, JSONSchemaID } from 'jsvrx';
 
 import ajv from 'ajv';
 
